@@ -22,18 +22,18 @@ for i in range(len(lines)):
 # Check if CUAVA-2 TLE data was found
 if tle_line1 and tle_line2:
     # Print the TLE data
-    print("CUAVA-2 TLE Data:")
+    # print("CUAVA-2 TLE Data:")
     print(tle_line1)
     print(tle_line2)
 
     # Extract orbital parameters from TLE lines
     # Line 1
     epoch_year = int(tle_line1[18:20])
-    epoch_day = float(tle_line1[20:32])
-    epoch_year_date= float(tle_line1[18:32])
+    epoch_day = int(tle_line1[20:23])
+    epoch_year_date = f"{epoch_year:02}.{epoch_day:03}"
     mean_motion_derivative = float(tle_line1[33:43].strip())
     mean_motion_sec_derivative = float(tle_line1[44:50].strip() + "e" + tle_line1[50:52].strip())
-    bstar_drag_term = float(tle_line1[53:59].strip() + "e" + tle_line1[59:61].strip())
+    bstar_drag_term = float("0." + tle_line1[53:59].strip() + "e" + tle_line1[59:61].strip())
 
     # Line 2
     inclination = float(tle_line2[8:16].strip())  # Inclination (degrees)
@@ -52,7 +52,7 @@ if tle_line1 and tle_line2:
     print(f"B* Drag Term: {bstar_drag_term:.4f}")
     print(f"Mean Motion (revolutions per day): {mean_motion:.8f}")    
     print(f"Mean Anomaly (degrees): {mean_anomaly:.4f}")
-    print(f"Epoch Time: {epoch_year_date:.8f}")
+    print(f"Epoch Time: {epoch_year_date}")
    
     # print(f"Revolution Number at Epoch: {revolution_number_at_epoch}")
 else:
